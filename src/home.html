@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guess What Game</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <div id="game-container">
+    <h1>Guess What Game</h1>
+
+    <div id="clue">
+      <p>Clue: <span id="clue-phrase">Animal that says "meow"</span></p>
+    </div>
+
+    <div id="word-to-guess">
+      <p>Word: <span id="masked-word">____</span></p>
+    </div>
+
+    <div id="letter-buttons">
+      <!-- Letter buttons will be dynamically generated here -->
+    </div>
+
+    <div id="game-info">
+      <p>Guesses Remaining: <span id="guesses-left">6</span></p>
+      <p>Incorrect Guesses: <span id="incorrect-guesses"></span></p>
+    </div>
+
+    <div id="message"></div>
+    <button id="next-word-btn" style="display:none;" onclick="startNewGame()">Next Word</button>
+    <button id="return-btn" style="display:none;" onclick="resetGame()">Return</button>
+    <button id="play-again-btn" style="display:none;" onclick="playAgain()">Play Again</button>
+  </div>
+  <script src="app.js"></script>
+</body>
+
+</html>
