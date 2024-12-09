@@ -1,4 +1,3 @@
-// app.js
 const clues = [
   { phrase: "Animal that says 'meow'", word: "cat" },
   { phrase: "Famous wizard", word: "harry" },
@@ -7,13 +6,12 @@ const clues = [
   { phrase: "Fruit that's yellow and monkeys love", word: "banana" }
 ];
 
-let usedClues = [];  // To track used clues
+let usedClues = [];
 let currentClue;
 let maskedWord;
 let incorrectGuesses = [];
 let guessesLeft = 6;
 
-// Select DOM elements
 const clueElement = document.getElementById("clue-phrase");
 const wordElement = document.getElementById("masked-word");
 const guessesLeftElement = document.getElementById("guesses-left");
@@ -26,16 +24,15 @@ const playAgainButton = document.getElementById("play-again-btn");
 
 function getRandomClue() {
   if (usedClues.length === clues.length) {
-      return null;  // Return null when all clues are used
+      return null; 
   }
 
-  // Get a random clue that hasn't been used yet
   let randomClue;
   do {
       randomClue = clues[Math.floor(Math.random() * clues.length)];
   } while (usedClues.includes(randomClue));
   
-  usedClues.push(randomClue);  // Mark this clue as used
+  usedClues.push(randomClue); 
   return randomClue;
 }
 
@@ -55,11 +52,9 @@ function renderButtons() {
 }
 
 function handleGuess(letter) {
-  // Disable the button once clicked
   const button = event.target;
   button.disabled = true;
 
-  // Check if the guessed letter is in the word
   if (currentClue.word.includes(letter)) {
       let newMaskedWord = "";
       for (let i = 0; i < currentClue.word.length; i++) {
@@ -75,21 +70,19 @@ function handleGuess(letter) {
       guessesLeft--;
   }
 
-  // Update the UI
   renderWord();
   renderGameInfo();
 
-  // Check for win or lose
   if (maskedWord === currentClue.word) {
       messageElement.textContent = "Congratulations! You've guessed the word!";
       messageElement.style.color = "green";
-      nextWordButton.style.display = "inline-block"; // Show the "Next Word" button
-      returnButton.style.display = "none"; // Hide the "Return" button
+      nextWordButton.style.display = "inline-block";
+      returnButton.style.display = "none"; 
   } else if (guessesLeft === 0) {
       messageElement.textContent = `Game Over! The word was: ${currentClue.word}`;
       messageElement.style.color = "red";
-      nextWordButton.style.display = "none"; // Hide the "Next Word" button
-      returnButton.style.display = "inline-block"; // Show the "Return" button
+      nextWordButton.style.display = "none"; 
+      returnButton.style.display = "inline-block"; 
   }
 }
 
@@ -99,14 +92,13 @@ function renderGameInfo() {
 }
 
 function startNewGame() {
-  currentClue = getRandomClue(); // Get a new random clue
+  currentClue = getRandomClue(); 
   if (!currentClue) {
-      // If no more clues are available (game completed)
       messageElement.textContent = "Congratulations! You've completed all rounds!";
       messageElement.style.color = "blue";
-      nextWordButton.style.display = "none"; // Hide the "Next Word" button
-      returnButton.style.display = "none"; // Hide the "Return" button
-      playAgainButton.style.display = "inline-block"; // Show "Play Again"
+      nextWordButton.style.display = "none"; 
+      returnButton.style.display = "none"; 
+      playAgainButton.style.display = "inline-block"; 
       return;
   }
 
@@ -114,11 +106,10 @@ function startNewGame() {
   incorrectGuesses = [];
   guessesLeft = 6;
   messageElement.textContent = "";
-  nextWordButton.style.display = "none"; // Hide the "Next Word" button
-  returnButton.style.display = "none"; // Hide the "Return" button
-  playAgainButton.style.display = "none"; // Hide the "Play Again" button
+  nextWordButton.style.display = "none"; 
+  returnButton.style.display = "none"; 
+  playAgainButton.style.display = "none";
 
-  // Update the clue phrase with the new one
   clueElement.textContent = `Clue: ${currentClue.phrase}`;
   
   renderWord();
@@ -127,13 +118,11 @@ function startNewGame() {
 }
 
 function resetGame() {
-  // Reset everything to start over with the first word
   usedClues = [];
-  startNewGame();  // Start from the first clue
+  startNewGame(); 
 }
 
 function playAgain() {
-  // Reset everything and start a new game from the first word
   usedClues = [];
   startNewGame();
 }
